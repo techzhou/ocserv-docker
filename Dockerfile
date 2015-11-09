@@ -58,7 +58,7 @@ WORKDIR /etc/ocserv
 
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 443
-CMD ["ocserv", "-c", "/etc/ocserv/ocserv.conf", "-f"]
+
+CMD ["/entrypoint.sh"]
