@@ -42,13 +42,13 @@ RUN buildDeps=" \
 	&& make -j"$(nproc)" \
 	&& make install \
 	&& mkdir -p /etc/ocserv \
-	&& cp ocserv.conf /etc/ocserv/ocserv.conf \
 	&& cd / \
 	&& rm -fr /usr/src/lz4 \
 	&& rm -fr /usr/src/ocserv \
 	&& apt-get purge -y --auto-remove $buildDeps
 
 # Setup config
+COPY ocserv.conf /etc/ocserv/
 COPY route.txt /tmp/
 RUN set -x \
 	&& cat /tmp/route.txt >> /etc/ocserv/ocserv.conf \
