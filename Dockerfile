@@ -56,9 +56,9 @@ RUN set -x \
 
 WORKDIR /etc/ocserv
 
-COPY docker-entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY vpn.sh /vpn.sh
+RUN chmod +x /vpn.sh
 
 EXPOSE 443
 
-CMD ["/entrypoint.sh"]
+CMD ["/vpn.sh"]

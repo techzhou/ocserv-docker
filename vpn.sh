@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -f /etc/ocserv/server-key.pem ] || [ ! -f /etc/ocserv/server-cert.pem ]; then
+if [ ! -f /opt/server-key.pem ] || [ ! -f /opt/server-cert.pem ]; then
 	CA_CN="VPN CA"
 	CA_ORG="Big Corp"
 	CA_DAYS=9999
@@ -8,7 +8,7 @@ if [ ! -f /etc/ocserv/server-key.pem ] || [ ! -f /etc/ocserv/server-cert.pem ]; 
 	SRV_ORG="HugeCopmany"
 	SRV_DAYS=9999
 
-	cd /etc/ocserv
+	cd /opt
 	certtool --generate-privkey --outfile ca-key.pem
 	cat > ca.tmpl <<-EOCA
 	cn = "$CA_CN"
@@ -45,8 +45,9 @@ iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 if [ ! -e /dev/net/tun ]; then
 	mkdir -p /dev/net
 	mknod /dev/net/tun c 10 200
-	chmod 600 /dev/net/tun
 fi
+
+chmod 600 /dev/net/tun
 
 ocserv -c /etc/ocserv/ocserv.conf -f $@
 
