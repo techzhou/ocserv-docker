@@ -22,7 +22,7 @@ RUN buildDeps=" \
 	set -x \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
 	&& LZ4_VERSION=`curl "https://github.com/lz4/lz4/releases/latest" | sed -n 's/^.*tag\/\(.*\)".*/\1/p'` \
-	&& curl -SL "https://github.com/Cyan4973/lz4/archive/$LZ4_VERSION.tar.gz" -o lz4.tar.gz \
+	&& curl -SL "https://github.com/lz4/lz4/archive/$LZ4_VERSION.tar.gz" -o lz4.tar.gz \
 	&& mkdir -p /usr/src/lz4 \
 	&& tar -xf lz4.tar.gz -C /usr/src/lz4 --strip-components=1 \
 	&& rm lz4.tar.gz \
